@@ -95,6 +95,9 @@ const ErrorImageContainer = styled.div`
   height: 20px;
   right: 14px;
   top: 14px;
+
+  transition: all 0.3s ease-in-out;
+  opacity: ${(p) => (p.isError ? "1" : "0")};
 `;
 
 const ErrorMessageContainer = styled.div`
@@ -109,6 +112,9 @@ const ErrorMessageContainer = styled.div`
   color: white;
   background-color: var(--color-soft-red);
   border-radius: 0px 0px 6px 6px;
+
+  transition: all 0.3s ease-in-out;
+  opacity: ${(p) => (p.isError ? "1" : "0")};
 `;
 
 function FooterFiller() {
@@ -134,6 +140,8 @@ function FooterFiller() {
       <InputWrapper>
         <InputContainer>
           <Input
+            aria-label={"Email address"}
+            aria-describedby={"error-message"}
             error={errorMessage?.length > 0}
             ref={inputRef}
             placeholder={"Enter your email address"}
@@ -143,19 +151,18 @@ function FooterFiller() {
               }
             }}
           />
-          {errorMessage?.length > 0 ? (
-            <>
-              <ErrorImageContainer>
-                <Image
-                  src={"/frontendmentor_15/icon-error.svg"}
-                  alt={"error icon image"}
-                />
-              </ErrorImageContainer>
-              <ErrorMessageContainer>{errorMessage}</ErrorMessageContainer>
-            </>
-          ) : (
-            ""
-          )}
+          <ErrorImageContainer
+            id={"error-message"}
+            isError={errorMessage?.length > 0}
+          >
+            <Image
+              src={"/frontendmentor_15/icon-error.svg"}
+              alt={"error icon image"}
+            />
+          </ErrorImageContainer>
+          <ErrorMessageContainer isError={errorMessage?.length > 0}>
+            {errorMessage}
+          </ErrorMessageContainer>
         </InputContainer>
         <Button
           color={"red"}

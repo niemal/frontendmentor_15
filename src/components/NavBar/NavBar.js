@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import { hoverSupported } from "../hoverSupported";
 import { QUERIES } from "../constants";
 import { useState, useRef } from "react";
+import ClickableWrapper from "../ClickableWrapper";
 
 const Wrapper = styled.div`
   display: flex;
@@ -88,6 +89,11 @@ const Link = styled.a`
   letter-spacing: 1.4px;
   padding: 2px;
   transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: 2px solid var(--color-soft-blue);
+    outline-offset: 3px;
+  }
 
   ${hoverSupported(css`
     &:hover {
@@ -211,10 +217,16 @@ function NavBar() {
         />
       </LogoContainer>
 
-      <NavWrapper>
-        <Link href={"/"}>FEATURES</Link>
-        <Link href={"/"}>PRICING</Link>
-        <Link href={"/"}>CONTACT</Link>
+      <NavWrapper aria-label={"website menu navigation"}>
+        <ClickableWrapper>
+          <Link href={"/"}>FEATURES</Link>
+        </ClickableWrapper>
+        <ClickableWrapper>
+          <Link href={"/"}>PRICING</Link>
+        </ClickableWrapper>
+        <ClickableWrapper>
+          <Link href={"/"}>CONTACT</Link>
+        </ClickableWrapper>
         <Button style={{ marginRight: "-4px" }} color={"red"} spacing={true}>
           LOGIN
         </Button>

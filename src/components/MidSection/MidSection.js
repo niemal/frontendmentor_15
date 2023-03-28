@@ -5,6 +5,7 @@ import { Image } from "../MainBody";
 import Button from "../Button";
 import { hoverSupported } from "../hoverSupported";
 import { QUERIES } from "../constants";
+import ClickableWrapper from "../ClickableWrapper";
 
 const Wrapper = styled.div`
   position: relative;
@@ -93,7 +94,7 @@ const TabWrapper = styled.div`
   }
 `;
 
-const Tab = styled.div`
+const Tab = styled.button`
   text-align: center;
   padding: 28px 58px;
   transition: all 0.3s ease-in-out;
@@ -104,6 +105,13 @@ const Tab = styled.div`
   cursor: pointer;
   font-size: ${16 / 16}rem;
   z-index: 4;
+
+  border-radius: 12px 12px 0px 0px;
+
+  &:focus {
+    outline: 2px solid var(--color-soft-blue);
+    outline-offset: 3px;
+  }
 
   ${hoverSupported(css`
     &:hover {
@@ -272,42 +280,39 @@ function MidSection() {
           </Desc>
         </TextWrapper>
 
-        <TabsWrapper>
+        <TabsWrapper aria-live={"polite"}>
           <TabWrapper first={true}>
-            <Tab
-              active={tab === 0}
+            <ClickableWrapper
               onClick={() => {
                 setTrigger(false);
                 setPrevTab(tab);
                 setTab(0);
               }}
             >
-              Simple Bookmarking
-            </Tab>
+              <Tab active={tab === 0}>Simple Bookmarking</Tab>
+            </ClickableWrapper>
           </TabWrapper>
           <TabWrapper>
-            <Tab
-              active={tab === 1}
+            <ClickableWrapper
               onClick={() => {
                 setTrigger(false);
                 setPrevTab(tab);
                 setTab(1);
               }}
             >
-              Speedy Searching
-            </Tab>
+              <Tab active={tab === 1}>Speedy Searching</Tab>
+            </ClickableWrapper>
           </TabWrapper>
           <TabWrapper>
-            <Tab
-              active={tab === 2}
+            <ClickableWrapper
               onClick={() => {
                 setTrigger(false);
                 setPrevTab(tab);
                 setTab(2);
               }}
             >
-              Easy Sharing
-            </Tab>
+              <Tab active={tab === 2}>Easy Sharing</Tab>
+            </ClickableWrapper>
           </TabWrapper>
         </TabsWrapper>
       </Container>

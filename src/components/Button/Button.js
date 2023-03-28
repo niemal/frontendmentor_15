@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { hoverSupported } from "../hoverSupported";
 import { QUERIES } from "../constants";
+import ClickableWrapper from "../ClickableWrapper";
 
 const Wrapper = styled.div`
   padding: 14px 33px;
@@ -27,6 +28,15 @@ const Wrapper = styled.div`
 
   border: 2px solid transparent;
   transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: 2px solid
+      ${(p) =>
+        p.color === "red"
+          ? "var(--color-very-dark-blue)"
+          : "var(--color-soft-blue)"};
+    outline-offset: 3px;
+  }
 
   ${hoverSupported(css`
     &:hover {
@@ -65,9 +75,11 @@ const Wrapper = styled.div`
 
 function Button({ color, spacing, children, ...props }) {
   return (
-    <Wrapper color={color} letterspacing={spacing} {...props}>
-      {children}
-    </Wrapper>
+    <ClickableWrapper {...props}>
+      <Wrapper color={color} letterspacing={spacing}>
+        {children}
+      </Wrapper>
+    </ClickableWrapper>
   );
 }
 

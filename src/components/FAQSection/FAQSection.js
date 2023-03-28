@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import { hoverSupported } from "../hoverSupported";
 import { QUERIES } from "../constants";
+import ClickableWrapper from "../ClickableWrapper";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -51,7 +52,7 @@ const Desc = styled.span`
   }
 `;
 
-const FAQWrapper = styled.div`
+const FAQWrapper = styled.section`
   margin-top: 26px;
   width: 550px;
   padding: 12px 0px;
@@ -74,7 +75,7 @@ const Entry = styled.div`
   width: 100%;
 `;
 
-const EntryNameWrapper = styled.div`
+const EntryNameWrapper = styled.button`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -84,6 +85,11 @@ const EntryNameWrapper = styled.div`
   padding-bottom: 24px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+
+  &:focus {
+    outline: 2px solid var(--color-soft-blue);
+    outline-offset: 3px;
+  }
 
   ${(p) =>
     p.last
@@ -157,9 +163,11 @@ function FAQSection() {
         answered please feel free to email us.
       </Desc>
 
-      <FAQWrapper>
+      <FAQWrapper aria-label={"Frequently Answered Questions"}>
         <Entry>
-          <EntryNameWrapper
+          <ClickableWrapper
+            aria-controls={"what-is-bookmark"}
+            aria-expanded={open === 0}
             onClick={() => {
               if (open === 0) {
                 setOpen(-1);
@@ -167,18 +175,23 @@ function FAQSection() {
                 setOpen(0);
               }
             }}
-            first={true}
+          >
+            <EntryNameWrapper first={true} isOpen={open === 0}>
+              <EntryName>What is Bookmark?</EntryName>
+              <ArrowContainer isOpen={open === 0}>
+                <Image
+                  src={"/frontendmentor_15/icon-arrow.svg"}
+                  alt={"arrow image"}
+                />
+              </ArrowContainer>
+            </EntryNameWrapper>
+          </ClickableWrapper>
+          <EntryContainer
+            id={"what-is-bookmark"}
+            role={"region"}
+            aria-labelledby={"what-is-bookmark"}
             isOpen={open === 0}
           >
-            <EntryName>What is Bookmark?</EntryName>
-            <ArrowContainer isOpen={open === 0}>
-              <Image
-                src={"/frontendmentor_15/icon-arrow.svg"}
-                alt={"arrow image"}
-              />
-            </ArrowContainer>
-          </EntryNameWrapper>
-          <EntryContainer isOpen={open === 0}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -190,7 +203,9 @@ function FAQSection() {
         </Entry>
 
         <Entry>
-          <EntryNameWrapper
+          <ClickableWrapper
+            aria-controls={"how-can-new-browser"}
+            aria-expanded={open === 1}
             onClick={() => {
               if (open === 1) {
                 setOpen(-1);
@@ -198,17 +213,23 @@ function FAQSection() {
                 setOpen(1);
               }
             }}
+          >
+            <EntryNameWrapper isOpen={open === 1}>
+              <EntryName>How can I request a new browser?</EntryName>
+              <ArrowContainer isOpen={open === 1}>
+                <Image
+                  src={"/frontendmentor_15/icon-arrow.svg"}
+                  alt={"arrow image"}
+                />
+              </ArrowContainer>
+            </EntryNameWrapper>
+          </ClickableWrapper>
+          <EntryContainer
+            id={"how-can-new-browser"}
+            role={"region"}
+            aria-labelledby={"how-can-new-browser"}
             isOpen={open === 1}
           >
-            <EntryName>How can I request a new browser?</EntryName>
-            <ArrowContainer isOpen={open === 1}>
-              <Image
-                src={"/frontendmentor_15/icon-arrow.svg"}
-                alt={"arrow image"}
-              />
-            </ArrowContainer>
-          </EntryNameWrapper>
-          <EntryContainer isOpen={open === 1}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -220,7 +241,9 @@ function FAQSection() {
         </Entry>
 
         <Entry>
-          <EntryNameWrapper
+          <ClickableWrapper
+            aria-controls={"is-there-mobile-app"}
+            aria-expanded={open === 2}
             onClick={() => {
               if (open === 2) {
                 setOpen(-1);
@@ -228,17 +251,23 @@ function FAQSection() {
                 setOpen(2);
               }
             }}
+          >
+            <EntryNameWrapper isOpen={open === 2}>
+              <EntryName>Is there a mobile app?</EntryName>
+              <ArrowContainer isOpen={open === 2}>
+                <Image
+                  src={"/frontendmentor_15/icon-arrow.svg"}
+                  alt={"arrow image"}
+                />
+              </ArrowContainer>
+            </EntryNameWrapper>
+          </ClickableWrapper>
+          <EntryContainer
+            id={"is-there-mobile-app"}
+            role={"region"}
+            aria-labelledby={"is-there-mobile-app"}
             isOpen={open === 2}
           >
-            <EntryName>Is there a mobile app?</EntryName>
-            <ArrowContainer isOpen={open === 2}>
-              <Image
-                src={"/frontendmentor_15/icon-arrow.svg"}
-                alt={"arrow image"}
-              />
-            </ArrowContainer>
-          </EntryNameWrapper>
-          <EntryContainer isOpen={open === 2}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -250,7 +279,9 @@ function FAQSection() {
         </Entry>
 
         <Entry>
-          <EntryNameWrapper
+          <ClickableWrapper
+            aria-controls={"what-about-other"}
+            aria-expanded={open === 3}
             onClick={() => {
               if (open === 3) {
                 setOpen(-1);
@@ -258,18 +289,23 @@ function FAQSection() {
                 setOpen(3);
               }
             }}
-            last={true}
+          >
+            <EntryNameWrapper last={true} isOpen={open === 3}>
+              <EntryName>What about other Chromium browsers?</EntryName>
+              <ArrowContainer isOpen={open === 3}>
+                <Image
+                  src={"/frontendmentor_15/icon-arrow.svg"}
+                  alt={"arrow image"}
+                />
+              </ArrowContainer>
+            </EntryNameWrapper>
+          </ClickableWrapper>
+          <EntryContainer
+            id={"what-about-other"}
+            role={"region"}
+            aria-labelledby={"what-about-other"}
             isOpen={open === 3}
           >
-            <EntryName>What about other Chromium browsers?</EntryName>
-            <ArrowContainer isOpen={open === 3}>
-              <Image
-                src={"/frontendmentor_15/icon-arrow.svg"}
-                alt={"arrow image"}
-              />
-            </ArrowContainer>
-          </EntryNameWrapper>
-          <EntryContainer isOpen={open === 3}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut

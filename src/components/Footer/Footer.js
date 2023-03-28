@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { hoverSupported } from "../hoverSupported";
 import { QUERIES } from "../constants";
+import ClickableWrapper from "../ClickableWrapper";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -58,6 +59,12 @@ const NavEntry = styled.a`
   letter-spacing: 1.4px;
   transition: all 0.3s ease-in-out;
 
+  border-radius: 4px;
+  &:focus {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
   ${hoverSupported(css`
     &:hover {
       color: var(--color-soft-red);
@@ -81,7 +88,12 @@ const SocialWrapper = styled.div`
 
 const SocialContainer = styled.div`
   width: 24px;
-  height: 24px;F
+  height: 24px;
+
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    outline: 2px solid white;
+    outline-offset: 6px;
   }
 
   &:hover ${Image} {
@@ -102,26 +114,36 @@ function Footer() {
             />
           </LogoContainer>
 
-          <NavWrapper>
-            <NavEntry href={"/"}>FEATURES</NavEntry>
-            <NavEntry href={"/"}>PRICING</NavEntry>
-            <NavEntry href={"/"}>CONTACT</NavEntry>
+          <NavWrapper aria-label={"footer menu navigation"}>
+            <ClickableWrapper>
+              <NavEntry href={"/"}>FEATURES</NavEntry>
+            </ClickableWrapper>
+            <ClickableWrapper>
+              <NavEntry href={"/"}>PRICING</NavEntry>
+            </ClickableWrapper>
+            <ClickableWrapper>
+              <NavEntry href={"/"}>CONTACT</NavEntry>
+            </ClickableWrapper>
           </NavWrapper>
         </LogoAndNavWrapper>
 
         <SocialWrapper>
-          <SocialContainer>
-            <Image
-              src={"/frontendmentor_15/icon-facebook.svg"}
-              alt={"facebook logo"}
-            />
-          </SocialContainer>
-          <SocialContainer>
-            <Image
-              src={"/frontendmentor_15/icon-twitter.svg"}
-              alt={"facebook logo"}
-            />
-          </SocialContainer>
+          <ClickableWrapper>
+            <SocialContainer>
+              <Image
+                src={"/frontendmentor_15/icon-facebook.svg"}
+                alt={"facebook logo"}
+              />
+            </SocialContainer>
+          </ClickableWrapper>
+          <ClickableWrapper>
+            <SocialContainer>
+              <Image
+                src={"/frontendmentor_15/icon-twitter.svg"}
+                alt={"facebook logo"}
+              />
+            </SocialContainer>
+          </ClickableWrapper>
         </SocialWrapper>
       </Container>
     </Wrapper>
